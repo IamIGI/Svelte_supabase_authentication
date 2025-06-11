@@ -1,3 +1,50 @@
+<script lang="ts">
+  import type { ActionData } from '../../routes/register/$types';
+  import Button from './Button.svelte';
+
+  interface ComponentProps {
+    isRegistration: boolean;
+    form: ActionData;
+  }
+
+  let { isRegistration, form }: ComponentProps = $props();
+</script>
+
+<div class="default-margin auth-container">
+  <h1 class="mb-l">{isRegistration ? 'Register' : 'Login'}</h1>
+  <div class="form-and-social-login">
+    <form class="auth-form" method="POST">
+      {#if form && form.errors?.length}
+        {#each form.errors as error}
+          <div class="auth-error">
+            <p>{error}</p>
+          </div>
+        {/each}
+      {/if}
+      {#if isRegistration}
+        <input type="text" placeholder="Name" name="name" value={form?.name || ''} />
+      {/if}
+      <input type="email" placeholder="Email" name="email" value={form?.email || ''} />
+      <input type="password" placeholder="Password" name="password" value={form?.password || ''} />
+      {#if isRegistration}
+        <input
+          type="password"
+          placeholder="Confirm password"
+          name="passwordConfirmation"
+          value={form?.passwordConfirmation || ''}
+        />
+      {/if}
+      <Button type="submit">{isRegistration ? 'Register' : 'Login'}</Button>
+      {#if isRegistration}
+        <p class="auth-hint mt-s">Already have an account? <a href="/login">Log In.</a></p>
+      {:else}
+        <p class="auth-hint mt-s">Do not have an account yet? <a href="/register">Sign In.</a></p>
+      {/if}
+    </form>
+    <div class="social-login"></div>
+  </div>
+</div>
+
 <style>
   .auth-container {
     margin-top: 80px;
