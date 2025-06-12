@@ -1,10 +1,17 @@
 <script>
   import { invalidate } from '$app/navigation';
   import { Header } from '$components';
+  import { setUserState } from '$lib/state/user-state.svelte';
   import './../app.css';
 
   let { data, children } = $props();
   let { session, supabase, user } = $derived(data);
+
+  let userState = setUserState({ session: data.session, supabase: data.supabase, user: data.user });
+
+  $effect(() => {
+    userState.updateState({ session, supabase, user });
+  });
 
   $effect(() => {
     const { data } = supabase.auth.onAuthStateChange((_, newSession) => {
