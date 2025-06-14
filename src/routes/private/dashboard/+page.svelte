@@ -1,3 +1,22 @@
+<script lang="ts">
+  import { getUserState } from '$lib/state/user-state.svelte';
+  import { onMount } from 'svelte';
+
+  let userContext = getUserState();
+  let { allBooks } = $derived(userContext);
+
+  onMount(() => console.log('t1'));
+  console.log('t2');
+
+  $inspect(allBooks);
+</script>
+
+<ul>
+  {#each allBooks as book}
+    <li>{book.title}</li>
+  {/each}
+</ul>
+
 <style>
   .dashboard-header {
     display: flex;

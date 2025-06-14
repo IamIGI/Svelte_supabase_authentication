@@ -1,3 +1,9 @@
+<script lang="ts">
+  let { children } = $props();
+</script>
+
+{@render children()}
+
 <style>
   .auth-area {
     display: flex;
