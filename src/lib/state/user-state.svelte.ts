@@ -1,8 +1,9 @@
+import { goto } from "$app/navigation";
 import type { Database } from "$lib/types/database.types";
 import type { Session, SupabaseClient, User } from "@supabase/supabase-js";
 import { getContext, setContext } from "svelte";
 
-type Book = Database['public']['Tables']['books']['Row']
+export type Book = Database['public']['Tables']['books']['Row']
 
 interface UserStateProps {
     session: Session | null;
@@ -50,6 +51,7 @@ export class UserState {
 
     logout() {
         this.supabase?.auth.signOut();
+        goto('/login'); //TODO: Isn't working, to fix
     }
 }
 
