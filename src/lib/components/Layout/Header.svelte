@@ -8,9 +8,9 @@
 </script>
 
 <header>
-	<!-- <a href={user ? "/private/dashboard" : "/"}>
-  </a>  -->
-	<img class="logo" src={bookNestLogo} alt="Go to home" />
+	<a href={user ? '/private/dashboard' : '/'}>
+		<img class="logo" src={bookNestLogo} alt="Go to home" />
+	</a>
 	<nav>
 		{#if !user}
 			<ul>
