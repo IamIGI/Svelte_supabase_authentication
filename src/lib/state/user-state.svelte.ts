@@ -58,6 +58,7 @@ export class UserState {
 const USER_STATE_KEY = Symbol("USER_STATE") //ID
 
 export function setUserState(data: UserStateProps) {
+    console.log('test');
     return setContext(USER_STATE_KEY, new UserState(data))
 }
 
