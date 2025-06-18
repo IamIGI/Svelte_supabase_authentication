@@ -50,6 +50,7 @@ export class UserState {
     }
 
     getHighestRatedBooks() {
+        console.log('elo')
         return this.allBooks.filter((book) => book.rating).toSorted((a,z) => z.rating! - a.rating!).slice(0,9);
     }
 
