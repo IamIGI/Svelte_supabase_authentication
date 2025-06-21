@@ -12,6 +12,10 @@ interface UserStateProps {
   supabase: SupabaseClient | null;
   user: User | null;
 }
+export interface OpenAiBook {
+  author: string;
+  bookTitle: string;
+}
 
 export class UserState {
   session = $state<Session | null>(null);
@@ -174,6 +178,30 @@ export class UserState {
     }
 
     goto('/private/dashboard');
+  }
+
+  async addBooksToLibrary(booksToAdd: OpenAiBook[]) {
+    if (!this.supabase || !this.user) return;
+
+    const userId = this.user.id;
+
+    const processBooks = booksToAdd.map((book) => ({
+      title: book.bookTitle,
+      author: book.author,
+      user_id: userId
+    }));
+
+    const { error } = await this.supabase.from('books').insert(processBooks);
+    if (error) throw new Error(error.message);
+
+    const { data } = await this.supabase
+      .from('books')
+      .select('*')
+      .eq('user_id', userId);
+
+    if (!data) throw new Error('Could not retrieve all books fro user');
+
+    this.allBooks = data;
   }
 
   async logout() {
