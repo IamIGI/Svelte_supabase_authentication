@@ -16,8 +16,8 @@
 		<div class="headline">
 			<h3 class="bold mb-xs">Welcome Back, {userName}</h3>
 			<p>
-				There's nothing quite like the journey a good book can take you on. Have you discovered any
-				new favorites recently?
+				There's nothing quite like the journey a good book can take you on. Have
+				you discovered any new favorites recently?
 			</p>
 		</div>
 	</div>
@@ -31,7 +31,8 @@
 	/>
 	<BookCategory
 		booksToDisplay={userContext.getBooksFromFavoriteGenre()}
-		categoryName={'Highest rated books from your favorite genre: ' + userContext.getFavoriteGenre()}
+		categoryName={'Highest rated books from your favorite genre: ' +
+			userContext.getFavoriteGenre()}
 	/>
 </div>
 

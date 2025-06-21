@@ -27,7 +27,9 @@
 					{userName}
 				</li>
 				<li>
-					<Button isMenu={true} onclick={() => userContext.logout()}>Logout</Button>
+					<Button isMenu={true} onclick={() => userContext.logout()}
+						>Logout</Button
+					>
 				</li>
 			</ul>
 		{/if}
